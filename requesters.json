@@ -1,0 +1,14 @@
+[
+  {
+    "id": "req_1",
+    "name": "Karlos Jesús Berrios Trujillo",
+    "email": "karlos.berrios.ext@orygen.com",
+    "is_default": true
+  },
+  {
+    "id": "req_2",
+    "name": "Microinformatica.IT@orygen.com",
+    "email": "microinformatica.it@orygen.com",
+    "is_default": false
+  }
+]

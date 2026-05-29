@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Ticket Automator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon">TA</div>
+                <h2>Ticket Automator</h2>
+            </div>
+            
+            <nav class="menu">
+                <a href="#" class="menu-item active" data-tab="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Dashboard
+                </a>
+                <a href="#" class="menu-item" data-tab="templates">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Plantillas
+                </a>
+                <a href="#" class="menu-item" data-tab="requesters">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Solicitantes
+                </a>
+                <a href="#" class="menu-item" data-tab="settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    Ajustes
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <header>
+                    <h1>Bienvenido a la Automatización</h1>
+                    <p>Selecciona una plantilla y un solicitante para lanzar la creación de ticket automática.</p>
+                </header>
+
+                <div class="glass-card launch-card">
+                    <div class="form-group">
+                        <label for="url-input">URL del Portal IT (Mesa de Ayuda)</label>
+                        <input type="text" id="url-input" class="modern-input" value="https://orygen.atlassian.net/servicedesk/customer/portal/69/group/82/create/132" placeholder="https://tu-portal-it.com/...">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="select-template">Plantilla de Ticket</label>
+                            <select id="select-template" class="modern-select">
+                                <option value="">Cargando...</option>
+                            </select>
+                        </div>
+                        <div class="form-group half">
+                            <label for="select-requester">Solicitante</label>
+                            <select id="select-requester" class="modern-select">
+                                <option value="">Cargando...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <button id="btn-launch" class="btn-primary pulse">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            Iniciar Automatización
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notificaciones de estado -->
+                <div id="status-container" class="status-container hidden">
+                    <div class="spinner"></div>
+                    <p id="status-text">Iniciando el navegador...</p>
+                </div>
+            </section>
+
+            <!-- Templates Tab -->
+            <section id="templates" class="tab-content">
+                <header>
+                    <h1>Plantillas de Tickets</h1>
+                    <button id="btn-new-template" class="btn-secondary">Nueva Plantilla</button>
+                </header>
+                <div class="list-container" id="templates-list">
+                    <!-- Cards will be injected via JS -->
+                </div>
+            </section>
+
+            <!-- Requesters Tab -->
+            <section id="requesters" class="tab-content">
+                <header>
+                    <h1>Solicitantes</h1>
+                    <button id="btn-new-requester" class="btn-secondary">Nuevo Solicitante</button>
+                </header>
+                <div class="list-container" id="requesters-list">
+                    <!-- Cards will be injected via JS -->
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="settings" class="tab-content">
+                <header>
+                    <h1>Ajustes por Defecto</h1>
+                </header>
+                <div class="glass-card">
+                    <p>Estos valores se completarán automáticamente en todos los tickets.</p>
+                    <div class="form-group">
+                        <label>Número de contacto</label>
+                        <input type="text" class="modern-input" value="0" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Ubicación del usuario</label>
+                        <input type="text" class="modern-input" value="SD Paseo del Bosque" disabled>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Template Editor Modal (hidden by default) -->
+    <div id="modal-template" class="modal hidden">
+        <div class="modal-content glass-card">
+            <h2>Editar Plantilla</h2>
+            <div class="form-group">
+                <label>Nombre de la Plantilla (interno)</label>
+                <input type="text" id="edit-tpl-name" class="modern-input">
+            </div>
+            <div class="form-row">
+                <div class="form-group half">
+                    <label>Categoría</label>
+                    <input type="text" id="edit-tpl-cat" class="modern-input">
+                </div>
+                <div class="form-group half">
+                    <label>Subcategoría (Opcional)</label>
+                    <input type="text" id="edit-tpl-subcat" class="modern-input">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Acción</label>
+                <input type="text" id="edit-tpl-action" class="modern-input">
+            </div>
+            <div class="form-group">
+                <label>Ingresar nombre de software</label>
+                <input type="text" id="edit-tpl-software" class="modern-input">
+            </div>
+            <div class="form-group">
+                <label>Resumen de la solicitud</label>
+                <input type="text" id="edit-tpl-summary" class="modern-input">
+            </div>
+            <div class="form-group">
+                <label>Detalle de la solicitud</label>
+                <textarea id="edit-tpl-details" class="modern-input"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('modal-template')">Cancelar</button>
+                <button class="btn-primary" id="btn-save-template">Guardar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

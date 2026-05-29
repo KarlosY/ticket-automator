@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesa de Ayuda IT - Mock</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f4f5f7; }
+        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        input[type="text"], select, textarea { width: 100%; padding: 10px; border: 1px solid #dfe1e6; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 100px; }
+        /* Simulated custom react-select */
+        .custom-select { position: relative; }
+        .custom-select select { display: none; } /* Hide real select */
+        .select-display { padding: 10px; border: 1px solid #dfe1e6; border-radius: 4px; background: white; cursor: pointer; }
+        .select-options { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #dfe1e6; z-index: 10; }
+        .select-options div { padding: 10px; cursor: pointer; }
+        .select-options div:hover { background: #f4f5f7; }
+        button { background: #0052cc; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>TI - ASISTENTE</h2>
+    <div class="form-container">
+        <form id="ticket-form" onsubmit="event.preventDefault(); alert('Ticket Enviado!');">
+            
+            <div class="form-group">
+                <label>Generar esta solicitud en nombre de *</label>
+                <input type="text" id="requester" placeholder="Buscar usuario...">
+            </div>
+
+            <div style="display: flex; gap: 20px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>Categoría de pedido Solicitud *</label>
+                    <select id="category">
+                        <option value="Hardware">Hardware</option>
+                        <option value="Software">Software</option>
+                        <option value="Accesos">Accesos</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Subcategoría *</label>
+                    <select id="subcategory">
+                        <option value="Ofimática">Ofimática</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Acción *</label>
+                <select id="action">
+                    <option value="Instalación de software">Instalación de software</option>
+                    <option value="Desinstalación">Desinstalación</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ingresar nombre de software *</label>
+                <input type="text" id="software_name">
+            </div>
+
+            <div class="form-group">
+                <label>Resumen de la solicitud *</label>
+                <input type="text" id="summary">
+            </div>
+
+            <div class="form-group">
+                <label>Detalle de la solicitud *</label>
+                <textarea id="details"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Número de contacto *</label>
+                <input type="text" id="contact" value="">
+            </div>
+
+            <div class="form-group">
+                <label>Ubicación del usuario *</label>
+                <input type="text" id="location" value="">
+            </div>
+
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Entornos Virtuales
+venv/
+env/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de SO
+.DS_Store
+Thumbs.db
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+
+# Archivos generados y Logs
+*.log
+build/
+dist/
+*.spec
+
+# Datos del navegador (Playwright)
+browser_data/

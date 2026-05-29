@@ -1,0 +1,23 @@
+[
+  {
+    "id": "tpl_1",
+    "name": "Actualización de Google Chrome - Vulnerabilidades",
+    "category": "Software",
+    "category_sub": "Otros",
+    "action": "Instalación de software",
+    "software_name": "Actualización de Google Chrome- Vulnerabilidades",
+    "summary": "Actualización de Google Chrome - Vulnerabilidades",
+    "details": "Actualización de Google Chrome - Vulnerabilidades",
+    "is_default": true
+  },
+  {
+    "id": "tpl_1780004539784",
+    "name": "Revisión de sala de VC Piso 9 - Sala Chimay",
+    "category": "Soporte",
+    "category_sub": "Videoconferencia",
+    "action": "Validación de conectividad",
+    "software_name": "",
+    "summary": "Revisión de sala de VC Piso 9 - Sala Chimay",
+    "details": "Revisión de sala de VC Piso 9 - Sala Chimay"
+  }
+]
