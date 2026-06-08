@@ -359,3 +359,60 @@ textarea.modern-input {
     gap: 1rem;
     margin-top: 2rem;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 1rem 0;
+        align-items: center;
+    }
+    
+    .logo-container {
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+    
+    .menu {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0;
+        width: 90%;
+        gap: 10px;
+    }
+    
+    .menu-item {
+        white-space: nowrap;
+        padding: 8px 12px;
+    }
+    
+    .content {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-group.half {
+        margin-bottom: 1.5rem;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}

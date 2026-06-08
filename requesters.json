@@ -1,9 +1,9 @@
 [
   {
     "id": "req_1",
-    "name": "Karlos Jesús Berrios Trujillo",
-    "email": "karlos.berrios.ext@orygen.com",
-    "is_default": true
+    "name": "MesaDeAyuda.IT@orygen.com",
+    "email": "mesadeayuda.it@orygen.com",
+    "is_default": false
   },
   {
     "id": "req_2",

@@ -47,8 +47,16 @@
 
                 <div class="glass-card launch-card">
                     <div class="form-group">
-                        <label for="url-input">URL del Portal IT (Mesa de Ayuda)</label>
-                        <input type="text" id="url-input" class="modern-input" value="https://orygen.atlassian.net/servicedesk/customer/portal/69/group/82/create/132" placeholder="https://tu-portal-it.com/...">
+                        <label for="url-input">Tipo de Solicitud (Portal IT)</label>
+                        <select id="url-input" class="modern-select">
+                            <option value="https://orygen.atlassian.net/servicedesk/customer/portal/69/group/82/create/132">Requerimiento</option>
+                            <option value="https://orygen.atlassian.net/servicedesk/customer/portal/69/group/83/create/117">Incidencia</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txt-upload">Cargar texto para Resumen y Detalle (Opcional .txt)</label>
+                        <input type="file" id="txt-upload" class="modern-input" accept=".txt" style="padding: 10px; background: rgba(255,255,255,0.05); color: #fff;">
                     </div>
                     
                     <div class="form-row">
@@ -146,7 +154,7 @@
                 <input type="text" id="edit-tpl-action" class="modern-input">
             </div>
             <div class="form-group">
-                <label>Ingresar nombre de software</label>
+                <label>Ingresar nombre de software (Opcional)</label>
                 <input type="text" id="edit-tpl-software" class="modern-input">
             </div>
             <div class="form-group">

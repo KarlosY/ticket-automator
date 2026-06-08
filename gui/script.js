@@ -73,10 +73,20 @@ function setupActions() {
         const tplId = document.getElementById('select-template').value;
         const reqId = document.getElementById('select-requester').value;
         const url = document.getElementById('url-input').value;
+        const txtFile = document.getElementById('txt-upload').files[0];
         
         if (!tplId || !reqId) {
             alert("Por favor selecciona una plantilla y un solicitante.");
             return;
+        }
+        
+        let customText = null;
+        if (txtFile) {
+            customText = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.readAsText(txtFile);
+            });
         }
         
         const statusContainer = document.getElementById('status-container');
@@ -87,7 +97,7 @@ function setupActions() {
         launchBtn.classList.remove('pulse');
         launchBtn.style.opacity = '0.5';
         
-        const res = await pywebview.api.start_automation(tplId, reqId, url);
+        const res = await pywebview.api.start_automation(tplId, reqId, url, customText);
         statusText.innerText = res.message || "Automatizando...";
     });
     

@@ -1,13 +1,13 @@
 [
   {
     "id": "tpl_1",
-    "name": "Actualización de Google Chrome - Vulnerabilidades",
-    "category": "Software",
-    "category_sub": "Otros",
-    "action": "Instalación de software",
-    "software_name": "Actualización de Google Chrome- Vulnerabilidades",
-    "summary": "Actualización de Google Chrome - Vulnerabilidades",
-    "details": "Actualización de Google Chrome - Vulnerabilidades",
+    "name": "Validación de operatividad de Conexión a Internet-1/06/2026(Regularizacion)",
+    "category": "Soporte",
+    "category_sub": "Consulta",
+    "action": "Procedimiento",
+    "software_name": "Validación de operatividad de Conexión a Internet-1/06/2026(Regularizacion)",
+    "summary": "Validación de operatividad de Conexión a Internet-1/06/2026(Regularizacion)",
+    "details": "Validación de operatividad de Conexión a Internet-1/06/2026(Regularizacion)",
     "is_default": true
   },
   {
@@ -19,5 +19,26 @@
     "software_name": "",
     "summary": "Revisión de sala de VC Piso 9 - Sala Chimay",
     "details": "Revisión de sala de VC Piso 9 - Sala Chimay"
+  },
+  {
+    "id": "tpl_1780522668602",
+    "name": "PROBLEMAS PARA PROYECTAR MONITOR",
+    "category": "Equipos y accesorios microinformáticos",
+    "category_sub": "Laptop",
+    "action": "Inconveniente con pantalla",
+    "software_name": "",
+    "summary": "PROBLEMAS PARA PROYECTAR MONITOR",
+    "details": "PROBLEMAS PARA PROYECTAR MONITOR"
+  },
+  {
+    "id": "tpl_1780522668603",
+    "name": "Actualización de Google Chrome - Vulnerabilidades",
+    "category": "Software",
+    "category_sub": "Otros",
+    "action": "Instalación de software",
+    "software_name": "Actualización de Google Chrome- Vulnerabilidades",
+    "summary": "Actualización de Google Chrome - Vulnerabilidades",
+    "details": "Actualización de Google Chrome - Vulnerabilidades",
+    "is_default": true
   }
 ]
