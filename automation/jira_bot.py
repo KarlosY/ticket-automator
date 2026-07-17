@@ -61,12 +61,24 @@ class JiraBot:
                     label.wait_for(state="attached", timeout=1500)
                     for_id = label.get_attribute("for")
                     if for_id:
-                        return page.locator(f"#{for_id}").first
+                        input_loc = page.locator(f"#{for_id}").first
+                        try:
+                            # Validar que el elemento con for_id realmente existe, sino hacer fallback
+                            input_loc.wait_for(state="attached", timeout=500)
+                            return input_loc
+                        except Exception:
+                            pass
                 except:
                     pass
                 
-                # Fallback XPath
-                fallback = page.locator(f"xpath=//*[text()='{label_text}' or contains(text(), '{label_text}')]/following::input[1] | //*[contains(text(), '{label_text}')]/following::textarea[1]").first
+                # Fallback XPath robusto (incluye editores modernos de texto enriquecido)
+                fallback_xpath = (
+                    f"//*[text()='{label_text}' or contains(text(), '{label_text}')]/following::input[1] | "
+                    f"//*[contains(text(), '{label_text}')]/following::textarea[1] | "
+                    f"//*[contains(text(), '{label_text}')]/following::*[@contenteditable='true'][1] | "
+                    f"//*[contains(text(), '{label_text}')]/following::*[@role='textbox'][1]"
+                )
+                fallback = page.locator(f"xpath={fallback_xpath}").first
                 try:
                     fallback.wait_for(state="attached", timeout=1000)
                     return fallback
@@ -79,18 +91,29 @@ class JiraBot:
             try:
                 locator = get_input_for_label(labels)
                 tag = locator.evaluate("el => el.tagName.toLowerCase()")
-                if tag not in ["input", "textarea"]:
+                is_editable = locator.evaluate("el => el.isContentEditable")
+                
+                if tag not in ["input", "textarea"] and not is_editable:
                     editor = locator.locator("[contenteditable='true']").first
                     if editor.count() > 0:
-                        editor.fill(value)
-                        print(f"Filled rich text {labels[0]} with {value}")
-                        return
-                    inner = locator.locator("input, textarea").first
-                    if inner.count() > 0:
-                        locator = inner
-                        
+                        locator = editor
+                    else:
+                        inner = locator.locator("input, textarea").first
+                        if inner.count() > 0:
+                            locator = inner
+                            
                 locator.wait_for(state="visible", timeout=3000)
-                locator.fill(value)
+                locator.scroll_into_view_if_needed()
+                
+                if locator.evaluate("el => el.isContentEditable"):
+                    locator.click()
+                    # Playwright's fill sometimes struggles with ProseMirror, so we clear and type
+                    page.keyboard.press("Control+a")
+                    page.keyboard.press("Backspace")
+                    locator.type(value, delay=10)
+                else:
+                    locator.fill(value)
+                    
                 print(f"Filled {labels[0]} with {value}")
             except Exception as e:
                 print(f"Could not fill {labels[0]}: {e}")
@@ -100,23 +123,32 @@ class JiraBot:
             
             for label_text in labels:
                 try:
-                    # Búsqueda DOM: El n-ésimo input visible DESPUÉS del texto
-                    # Esto evita perfectamente agarrar el input del vecino porque respeta el orden del DOM.
-                    # Ignoramos el atributo 'for' porque Jira a veces genera IDs duplicados en campos contiguos.
-                    xpath = f"(//*[self::label or self::span or self::legend][contains(text(), '{label_text}')])[1]/following::input[not(@type='hidden') and not(@type='checkbox')]"
-                    combo = page.locator(f"xpath={xpath}").nth(index)
-                    
-                    if combo.count() > 0:
-                        combo.wait_for(state="attached", timeout=2000)
-                        combo.scroll_into_view_if_needed()
-                        combo.click(force=True)
-                        page.wait_for_timeout(500) # Give React-Select time to open
-                        page.keyboard.type(value, delay=50)
-                        page.wait_for_timeout(1500) # Tiempo para que React-Select cargue las opciones
-                        page.keyboard.press("Enter")
-                        print(f"Typed and pressed Enter for {value} in {label_text} via DOM order (Index {index})")
-                        return True
-                        
+                     # 1. Encontrar el texto de la etiqueta
+                     label_node = page.locator(f"xpath=//*[text()='{label_text}' or contains(text(), '{label_text}')]").first
+                     label_node.wait_for(state="attached", timeout=3000)
+                     
+                     # 2. Buscar las cajas de texto (inputs) asociadas a este campo.
+                     # Buscamos inputs que no estén ocultos dentro del Padre, Abuelo, o siguientes.
+                     inputs = label_node.locator("xpath=..//input[not(@type='hidden')]")
+                     
+                     if inputs.count() <= index:
+                         inputs = label_node.locator("xpath=../..//input[not(@type='hidden')]")
+                         
+                     if inputs.count() <= index:
+                         # Fallback: buscar los siguientes inputs visibles en el documento
+                         inputs = page.locator(f"xpath=//*[text()='{label_text}' or contains(text(), '{label_text}')]/following::input[not(@type='hidden')]")
+
+                     if inputs.count() > index:
+                         cb_input = inputs.nth(index)
+                         cb_input.scroll_into_view_if_needed()
+                         cb_input.click(force=True)
+                         cb_input.fill("")
+                         cb_input.type(value, delay=50) # Tipeamos
+                         page.wait_for_timeout(1000) # Esperamos 1 segundo
+                         page.keyboard.press("Enter") # Seleccionamos
+                         print(f"Typed and pressed Enter for {value} in {label_text} (Index {index})")
+                         return True
+                         
                 except Exception as e:
                     print(f"Error acting on {label_text}: {e}")
                     continue
@@ -180,8 +212,9 @@ class JiraBot:
             submit_btn = page.locator("button:has-text('Enviar'), button:has-text('Create'), button:has-text('Submit'), input[type='submit']").first
             
             if submit_btn.is_visible(timeout=3000):
-                submit_btn.click()  # REACTIVADO PARA CREACIÓN EN LOTE
-                print("Clicked Enviar button")
+                # COMENTADO PARA PRUEBAS:
+                # submit_btn.click()  
+                print("Simulated clicking Enviar button (Test Mode)")
             else:
                 print("Could not find the Enviar button")
         except Exception as e:

@@ -45,6 +45,10 @@ function renderRequestersList() {
         <div class="item-card">
             <h3>${r.name}</h3>
             <p>${r.email}</p>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="btn-secondary" onclick="editRequester('${r.id}')">Editar</button>
+                <button class="btn-secondary" style="border-color: #ef4444; color: #ef4444;" onclick="deleteRequester('${r.id}')">Eliminar</button>
+            </div>
         </div>
     `).join('');
 }
@@ -132,6 +136,28 @@ function setupActions() {
             };
         });
     }
+    
+    const newReqBtn = document.getElementById('btn-new-requester');
+    if (newReqBtn) {
+        newReqBtn.addEventListener('click', () => {
+            document.getElementById('edit-req-name').value = '';
+            document.getElementById('edit-req-email').value = '';
+            
+            document.getElementById('modal-requester').classList.remove('hidden');
+            
+            document.getElementById('btn-save-requester').onclick = async () => {
+                const newReq = {
+                    id: 'req_' + Date.now(),
+                    name: document.getElementById('edit-req-name').value || 'Nuevo Solicitante',
+                    email: document.getElementById('edit-req-email').value
+                };
+                currentRequesters.push(newReq);
+                await pywebview.api.save_requesters(currentRequesters);
+                loadData();
+                closeModal('modal-requester');
+            };
+        });
+    }
 }
 
 // Called by Python when automation is done
@@ -197,6 +223,33 @@ async function deleteTemplate(id) {
     if (confirm('¿Estás seguro de que deseas eliminar esta plantilla?')) {
         currentTemplates = currentTemplates.filter(t => t.id !== id);
         await pywebview.api.save_templates(currentTemplates);
+        loadData();
+    }
+}
+
+function editRequester(id) {
+    const req = currentRequesters.find(r => r.id === id);
+    if (!req) return;
+    
+    document.getElementById('edit-req-name').value = req.name;
+    document.getElementById('edit-req-email').value = req.email;
+    
+    document.getElementById('modal-requester').classList.remove('hidden');
+    
+    document.getElementById('btn-save-requester').onclick = async () => {
+        req.name = document.getElementById('edit-req-name').value;
+        req.email = document.getElementById('edit-req-email').value;
+        
+        await pywebview.api.save_requesters(currentRequesters);
+        loadData();
+        closeModal('modal-requester');
+    };
+}
+
+async function deleteRequester(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este solicitante?')) {
+        currentRequesters = currentRequesters.filter(r => r.id !== id);
+        await pywebview.api.save_requesters(currentRequesters);
         loadData();
     }
 }

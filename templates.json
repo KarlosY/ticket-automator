@@ -40,5 +40,15 @@
     "summary": "Actualización de Google Chrome - Vulnerabilidades",
     "details": "Actualización de Google Chrome - Vulnerabilidades",
     "is_default": true
+  },
+  {
+    "id": "tpl_1780004539784",
+    "name": "Cambio de imagen en Screenbeam Piso 4 - Sala Rubí",
+    "category": "Soporte",
+    "category_sub": "Videoconferencia",
+    "action": "Cambio de imagen de Screenbean",
+    "software_name": "",
+    "summary": "Cambio de imagen en Screenbeam Piso 4 - Sala Rubí",
+    "details": "Cambio de imagen en Screenbeam Piso 4 - Sala Rubí"
   }
 ]
