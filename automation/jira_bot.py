@@ -212,9 +212,8 @@ class JiraBot:
             submit_btn = page.locator("button:has-text('Enviar'), button:has-text('Create'), button:has-text('Submit'), input[type='submit']").first
             
             if submit_btn.is_visible(timeout=3000):
-                # COMENTADO PARA PRUEBAS:
-                # submit_btn.click()  
-                print("Simulated clicking Enviar button (Test Mode)")
+                submit_btn.click()  # REACTIVADO PARA CREACIÓN EN LOTE
+                print("Clicked Enviar button")
             else:
                 print("Could not find the Enviar button")
         except Exception as e:
